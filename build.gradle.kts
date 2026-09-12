@@ -1,6 +1,6 @@
 allprojects {
 
-    group = "net.jandie1505"
+    group = "net.jandie1505.commandsystem"
     version = "1.0-SNAPSHOT"
 
     repositories {
