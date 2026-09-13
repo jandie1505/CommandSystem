@@ -224,9 +224,8 @@ public class UnixSocketCommandServer {
         if (this.pool != null) {
 
             this.pool.shutdownNow();
-            if (!this.pool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS)) {
-                LOGGER.debug("Timeout while waiting for sender shutdown of socket {}", this.activeSocketPath);
-                throw new IllegalStateException("Timeout while waiting for ExecutorService to shutdown");
+            if (!this.pool.awaitTermination(10, TimeUnit.SECONDS)) {
+                LOGGER.warn("Timeout while waiting for sender shutdown of socket {}", this.activeSocketPath);
             }
 
         }
