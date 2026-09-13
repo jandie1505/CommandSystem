@@ -28,7 +28,7 @@ import java.util.concurrent.*;
 
 /**
  * Can receive user commands using a unix socket.<br/>
- * How to use: echo '{"op":"execute","command":"test","tokens":["123"]}' | socat - UNIX-CONNECT:/tmp/stormflood-controlcenter.sock
+ * How to use: echo '{"op":"execute","command":"test","tokens":["123"]}' | socat - UNIX-CONNECT:/run/myapp/command.sock
  */
 public class UnixSocketCommandServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnixSocketCommandServer.class);

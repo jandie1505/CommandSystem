@@ -4,7 +4,7 @@
 //   goclient [client-options] <command> [command-args...]
 //
 // Example:
-//   goclient --socket-path /tmp/stormflood-controlcenter.sock unit info abc-123
+//   goclient --socket-path /run/myapp/command.sock status --verbose
 //
 // As soon as the first non-option argument is seen, that token and everything
 // after it is treated as the server command — even if further "--flags" follow,
@@ -79,15 +79,16 @@ type config struct {
 	help       bool
 }
 
-const envSocket = "STORMFLOOD_SOCKET"
+const envSocket = "COMMANDSYSTEM_SOCKET"
 
 // defaultSocketPath resolves the socket path from the environment.
 // Precedence overall (with parseClientArgs):
 //   1. explicit --socket-path / -s flag
-//   2. $STORMFLOOD_SOCKET environment variable
+//   2. $COMMANDSYSTEM_SOCKET environment variable
 //
-// No filesystem fallback — running multiple control centers in parallel makes
-// any implicit default ambiguous, so the user must pick one explicitly.
+// No filesystem fallback — this client is not tied to a particular application,
+// so any implicit default path would be a guess. The socket must be named
+// explicitly.
 func defaultSocketPath() string {
 	return os.Getenv(envSocket)
 }
@@ -444,7 +445,7 @@ func printHelp() {
 	fmt.Println("Special subcommands:")
 	fmt.Println("  completion bash|zsh|fish      Print shell tab-completion script")
 	fmt.Println()
-	fmt.Printf("Example:\n  %s --socket-path /tmp/foo.sock unit info abc-123\n\n", bin)
+	fmt.Printf("Example:\n  %s --socket-path /run/myapp/command.sock status --verbose\n\n", bin)
 	fmt.Printf("Socket path resolution (in order):\n")
 	fmt.Printf("  1. --socket-path / -s <path>\n")
 	fmt.Printf("  2. $%s\n", envSocket)
