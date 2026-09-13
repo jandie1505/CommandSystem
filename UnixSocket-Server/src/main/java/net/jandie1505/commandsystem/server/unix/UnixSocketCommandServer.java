@@ -265,8 +265,17 @@ public class UnixSocketCommandServer {
 
             SocketChannel socket = iterator.next();
             try {
+
+                // Get socket address before closing since it is not available after the socket has been closed.
+                String address;
+                try {
+                    address = String.valueOf(socket.getRemoteAddress());
+                } catch (Exception e) {
+                    address = "[unknown address]";
+                }
+
                 socket.close();
-                LOGGER.debug("Connection {} of Socket {} closed.", socket.getRemoteAddress(), this.activeSocketPath);
+                LOGGER.debug("Connection {} of Socket {} closed.", address, this.activeSocketPath);
             } catch (IOException e) {
                 LOGGER.error("Failed to close client socket.", e);
             }
