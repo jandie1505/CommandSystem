@@ -43,7 +43,7 @@ public class CommandRegistry {
         }
 
         try {
-            return cmd.execute(request);
+            return Objects.requireNonNull(cmd.execute(request));
         } catch (Throwable t) {
             LOGGER.error("Error while executing command {}", command, t);
             return ExecuteResponse.EXCEPTION;

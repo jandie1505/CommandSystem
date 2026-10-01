@@ -11,3 +11,4 @@ allprojects {
 
 extra["slf4jVersion"] = "2.0.17"
 extra["jsonVersion"] = "20251224"
+extra["jLineVersion"] = "4.1.3"

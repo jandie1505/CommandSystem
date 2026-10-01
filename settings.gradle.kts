@@ -4,4 +4,4 @@
 //}
 
 rootProject.name = "CommandSystem"
-include("Core", "Tools", "Server", "UnixSocket-Server", "JLine")
+include("Core", "Tools", "Server", "UnixSocket-Server", "JLine", "DemoApplication")
