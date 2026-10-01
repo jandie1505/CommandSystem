@@ -9,6 +9,6 @@ allprojects {
 
 }
 
-extra["slf4jVersion"] = "2.0.17"
-extra["jsonVersion"] = "20251224"
-extra["jLineVersion"] = "4.1.3"
+extra["slf4jVersion"] = "2.0.20"
+extra["jsonVersion"] = "20260814"
+extra["jLineVersion"] = "4.4.6"
