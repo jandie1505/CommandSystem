@@ -126,9 +126,17 @@ public class JLineConsole {
         var words = line.words();
         if (words.isEmpty()) return;
 
+        var partial = line.word();
+
+        // Cursor is on the first word: complete the command name itself
+        if (line.wordIndex() <= 0) {
+            var request = new CompleteRequest(CommandSender.ADMIN, List.of(), partial);
+            this.registry.completeCommand(null, request).completions().forEach(completion -> candidates.add(new Candidate(completion)));
+            return;
+        }
+
         String command = words.getFirst();
         List<String> args = words.subList(1, line.wordIndex());
-        var partial = line.word();
 
         var request = new CompleteRequest(CommandSender.ADMIN, args, partial);
         var response = this.registry.completeCommand(command, request);
